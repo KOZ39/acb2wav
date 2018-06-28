@@ -1,17 +1,26 @@
 # acb2wav
-> Girls' Frontline Only
+> Enjoy the Sound
 
-## 요구
-* Python 3.5+
-* [acbpy](https://github.com/Destrapier/acbpy)
-* [hcapy](https://github.com/Destrapier/hcapy)
+## Dependencies
+* [Python 3.5+](https://www.python.org/)
+* [acbpy (Destrapier)](https://github.com/Destrapier/acbpy)
+* [hcapy (Destrapier)](https://github.com/Destrapier/hcapy)
 
-## 사용법
-### 기본
+## Usage
 ```
-1. acb 폴더에 *.acb.bytes 파일들을 넣습니다.
-2. acb2wav.py 또는 acb2wav.exe를 실행합니다.
-3. wav 폴더에 파일명으로 된 폴더와 *.wav 파일들이 생성됩니다.
+acb2wav.exe [Options]
+
+Options:
+ -k1, --key1        Default: f27e3b22
+ -k2, --key2        Default: 00003657
+ -e, --extension    Default: acb.bytes
+ -i, --inputDir     Default: acb
+ -o, --outputDir    Default: wav
+ -ns, --noSub       Default: False
+```
+
+```
+acb2wav.exe -k1 00000000000022CE -k2 0 -e acb.txt -ns
 ```
 
 ## License
