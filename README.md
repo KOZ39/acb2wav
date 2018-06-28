@@ -16,7 +16,7 @@ Options:
  -e, --extension    Default: acb.bytes
  -i, --inputDir     Default: acb
  -o, --outputDir    Default: wav
- -ns, --noSub       Default: False
+ -ns, --noSubDir    Default: False
 ```
 
 ```
