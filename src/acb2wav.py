@@ -33,7 +33,7 @@ for i in glob.iglob(f"{args.inputDir}/**/*.{args.extension}", recursive=True):
             dirName = os.path.join(args.outputDir, os.path.basename(i).split(".")[0])
 
         pathlib.Path(dirName).mkdir(parents=True, exist_ok=True)
- 
+
         for i in acbpy.parse_binary(f):
             print(f"{i.track.name}.wav")
 
