@@ -25,7 +25,10 @@ start = time.time()
 
 d = hcapy.Decoder(args.key1, args.key2)
 
-for i in glob.iglob(f"{args.inputDir}/**/*.{args.extension}", recursive=True):
+if args.extension != "*":
+    args.extension = "*." + args.extension
+
+for i in glob.iglob(f"{args.inputDir}/**/{args.extension}", recursive=True):
     with open(i, "rb") as f:
         if args.noSubDir:
             dirName = args.outputDir
