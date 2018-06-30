@@ -11,8 +11,7 @@
 acb2wav.exe [Options]
 
 Options:
- -k1, --key1        Default: f27e3b22
- -k2, --key2        Default: 00003657
+ -k, --key          Default: 00003657f27e3b22
  -e, --extension    Default: acb.bytes
  -i, --inputDir     Default: acb
  -o, --outputDir    Default: wav
@@ -20,7 +19,7 @@ Options:
 ```
 
 ```
-acb2wav.exe -k1 00000000000022CE -k2 0 -e acb.txt -ns
+acb2wav.exe -k 00000000000022CE -e acb.txt -ns
 ```
 
 ## License
