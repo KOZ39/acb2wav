@@ -1,14 +1,21 @@
 #!/usr/bin/env python3
 
 import argparse
-import time
-import sys
 import glob
 import os
 import pathlib
+import sys
+import time
 
 import acbpy
 import hcapy
+
+
+def remove_words(str, *words):
+    for word in words:
+        str = str.replace(word, "")
+    return str
+
 
 parser = argparse.ArgumentParser()
 
@@ -27,35 +34,39 @@ d = hcapy.Decoder(args.key)
 if args.extension != "*":
     args.extension = "*." + args.extension
 
-for file in glob.iglob(f"{args.inputDir}/**/{args.extension}", recursive=True):
-    with open(file, "rb") as f:
-        fileName = os.path.basename(file)
+args.inputDir = remove_words(args.inputDir, "\**", "/**") + "\**"
 
-        if args.noSubDir:
-            dirName = args.outputDir
-        else:
-            dirName = os.path.join(args.outputDir, fileName.split(".")[0])
+path = os.path.join(args.inputDir, args.extension)
 
-        pathlib.Path(dirName).mkdir(parents=True, exist_ok=True)
+for i in glob.iglob(path, recursive=True):
+    if os.path.isfile(i):
+        with open(i, "rb") as f:
+            file_name = os.path.basename(f.name)
 
-        try:
-            for i in acbpy.parse_binary(f):
-                trackName = i.track.name + ".wav"
+            if args.noSubDir:
+                dir_name = args.outputDir
+            else:
+                dir_name = os.path.join(args.outputDir, file_name.split(".")[0])
 
-                print(f"{trackName}")
+            pathlib.Path(dir_name).mkdir(parents=True, exist_ok=True)
 
-                try:
-                    with open(f"{dirName}/{trackName}", "wb") as s:
-                        s.write(d.decode(i.binary.read()).read())
-                except hcapy.InvalidHCAError:
-                    print("Invalid hca!\n")
-        except:
-            print(f"{fileName} is invalid acb!\n")
+            try:
+                for i in acbpy.parse_binary(f):
+                    track_name = i.track.name
 
-            if not args.noSubDir:
-                os.rmdir(dirName)
+                    try:
+                        with open(os.path.join(dir_name, track_name + ".wav"), "wb") as f:
+                            f.write(d.decode(i.binary.read()).read())
 
-            continue
+                            print(f"{track_name}.wav")
+                    except hcapy.InvalidHCAError:
+                        print("{track_name} is invalid hca!")
+            except:
+                print(f"{file_name} is invalid acb!")
+
+                if not args.noSubDir:
+                    if not os.listdir(dir_name):
+                        os.rmdir(dir_name)
 
         print()
 
