@@ -34,7 +34,7 @@ d = hcapy.Decoder(args.key)
 if args.extension != "*":
     args.extension = "*." + args.extension
 
-args.inputDir = remove_words(args.inputDir, "\**", "/**") + "\**"
+args.inputDir = remove_words(args.inputDir, "\**", "/**") + "/**"
 
 path = os.path.join(args.inputDir, args.extension)
 
@@ -55,12 +55,12 @@ for i in glob.iglob(path, recursive=True):
                     track_name = i.track.name
 
                     try:
-                        with open(os.path.join(dir_name, track_name + ".wav"), "wb") as f:
+                        with open(os.path.join(dir_name, f"{track_name}.wav"), "wb") as f:
                             f.write(d.decode(i.binary.read()).read())
 
                             print(f"{track_name}.wav")
                     except hcapy.InvalidHCAError:
-                        print("{track_name} is invalid hca!")
+                        print(f"{track_name} is invalid hca!")
             except:
                 print(f"{file_name} is invalid acb!")
 
@@ -72,6 +72,4 @@ for i in glob.iglob(path, recursive=True):
 
 end = time.time()
 
-print(f"Time: {end - start:.3f}s\n")
-
-os.system("pause")
+print(f"Time: {end - start:.3f}s")
