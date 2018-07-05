@@ -22,5 +22,10 @@ Options:
 acb2wav.exe -k 00000000000022CE -e acb.txt -ns
 ```
 
+## Other Tools
+* [AssetStudio](https://github.com/Perfare/AssetStudio)
+* [DereTore](https://github.com/OpenCGSS/DereTore)
+* [HxD](https://mh-nexus.de/en/hxd/)
+
 ## License
 [MIT](https://github.com/KOZ39/acb2wav/blob/master/LICENSE)
