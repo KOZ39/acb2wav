@@ -20,6 +20,7 @@ Options:
 
 ```
 acb2wav.exe -k 00000000000022CE -e acb.txt -ns
+acb2wav.exe -k 8910 -e acb.txt -ns
 ```
 
 ## Other Tools

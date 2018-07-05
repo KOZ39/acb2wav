@@ -29,8 +29,11 @@ args = parser.parse_args()
 
 start = time.time()
 
-d = hcapy.Decoder(args.key)
-
+if args.key.isnumeric():
+    d = hcapy.Decoder(int(args.key))
+else:
+    d = hcapy.Decoder(args.key)
+    
 if args.extension != "*":
     args.extension = "*." + args.extension
 
