@@ -35,43 +35,42 @@ else:
     d = hcapy.Decoder(args.key)
     
 if args.extension != "*":
-    args.extension = "*." + args.extension
+    args.extension = f"*.{args.extension}"
 
 args.inputDir = remove_words(args.inputDir, "\**", "/**") + "/**"
 
 path = os.path.join(args.inputDir, args.extension)
 
-for i in glob.iglob(path, recursive=True):
-    if os.path.isfile(i):
-        with open(i, "rb") as f:
-            file_name = os.path.basename(f.name)
+for i in filter(os.path.isfile, glob.iglob(path, recursive=True)):
+    with open(i, "rb") as f:
+        file_name = os.path.basename(f.name).split(".")[0]
 
-            if args.noSubDir:
-                dir_name = args.outputDir
-            else:
-                dir_name = os.path.join(args.outputDir, file_name.split(".")[0])
+        if args.noSubDir:
+            dir_name = args.outputDir
+        else:
+            dir_name = os.path.join(args.outputDir, file_name)
 
-            pathlib.Path(dir_name).mkdir(parents=True, exist_ok=True)
+        pathlib.Path(dir_name).mkdir(parents=True, exist_ok=True)
 
-            try:
-                for i in acbpy.parse_binary(f):
-                    track_name = i.track.name
+        try:
+            for i in acbpy.parse_binary(f):
+                track_name = i.track.name
 
-                    try:
-                        with open(os.path.join(dir_name, f"{track_name}.wav"), "wb") as f:
-                            f.write(d.decode(i.binary.read()).read())
+                try:
+                    with open(os.path.join(dir_name, f"{track_name}.wav"), "wb") as f:
+                        f.write(d.decode(i.binary.read()).read())
 
-                            print(f"{track_name}.wav")
-                    except hcapy.InvalidHCAError:
-                        print(f"{track_name} is invalid hca!")
-            except:
-                print(f"{file_name} is invalid acb!")
+                        print(f"{track_name}.wav")
+                except hcapy.InvalidHCAError:
+                    print(f"{track_name} is invalid hca!")
+        except:
+            print(f"{file_name} is invalid acb!")
 
-                if not args.noSubDir:
-                    if not os.listdir(dir_name):
-                        os.rmdir(dir_name)
+            if not args.noSubDir:
+                if not os.listdir(dir_name):
+                    os.rmdir(dir_name)
 
-        print()
+    print()
 
 end = time.time()
 
