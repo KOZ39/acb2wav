@@ -1,7 +1,14 @@
 # acb2wav
 > Enjoy the Sound
 
-## Dependencies
+## System Requirements
+* Windows 7 or later
+* [Microsoft Visual C++ Redistributable 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48145)
+
+## Release
+[Here](https://github.com/KOZ39/acb2wav/releases)
+
+## Run from Source
 * [Python 3.5+](https://www.python.org/)
 * [acbpy (Destrapier)](https://github.com/Destrapier/acbpy)
 * [hcapy (Destrapier)](https://github.com/Destrapier/hcapy)
@@ -11,6 +18,7 @@
 acb2wav.exe [Options]
 
 Options:
+ -v, --version      show version and exit
  -k, --key          Default: 00003657f27e3b22
  -e, --extension    Default: acb.bytes
  -i, --inputDir     Default: acb

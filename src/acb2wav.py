@@ -10,6 +10,8 @@ import time
 import acbpy
 import hcapy
 
+VERSION = "1.0.0"
+
 
 def remove_words(str, *words):
     for word in words:
@@ -19,6 +21,7 @@ def remove_words(str, *words):
 
 parser = argparse.ArgumentParser()
 
+parser.add_argument("-v", "--version", action="store_true", help="show version and exit")
 parser.add_argument("-k", "--key", metavar="", default="00003657f27e3b22", help="Default: 00003657f27e3b22")
 parser.add_argument("-e", "--extension", metavar="", default="acb.bytes", help="Default: acb.bytes")
 parser.add_argument("-i", "--inputDir", metavar="", default="acb", help="Default: acb")
@@ -28,6 +31,10 @@ parser.add_argument("-ns", "--noSubDir", action="store_true", help="Default: Fal
 args = parser.parse_args()
 
 start = time.time()
+
+if args.version:
+    print(VERSION)
+    sys.exit()
 
 if args.key.isnumeric():
     d = hcapy.Decoder(int(args.key))
