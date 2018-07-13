@@ -21,8 +21,10 @@ def remove_words(str, *words):
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-v", "--version", action="store_true", help="show version and exit")
+parser.add_argument("-V", "--version", action="store_true", help="show version and exit")
 parser.add_argument("-k", "--key", metavar="", default="00003657f27e3b22", help="Default: 00003657f27e3b22")
+parser.add_argument("-v", "--volume", metavar="", type=int, default=100, help="Default: 100")
+parser.add_argument("-m", "--mode", metavar="", type=int, default=16, help="Default: 16")
 parser.add_argument("-e", "--extension", metavar="", default="acb.bytes", help="Default: acb.bytes")
 parser.add_argument("-i", "--inputDir", metavar="", default="acb", help="Default: acb")
 parser.add_argument("-o", "--outputDir", metavar="", default="wav", help="Default: wav")
@@ -65,7 +67,7 @@ for i in filter(os.path.isfile, glob.iglob(path, recursive=True)):
 
                 try:
                     with open(os.path.join(dir_name, f"{track_name}.wav"), "wb") as f:
-                        f.write(d.decode(i.binary.read()).read())
+                        f.write(d.decode(i.binary.read(), args.volume/100.0, args.mode).read())
 
                         print(f"{track_name}.wav")
                 except hcapy.InvalidHCAError:

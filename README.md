@@ -18,8 +18,10 @@
 acb2wav.exe [Options]
 
 Options:
- -v, --version      show version and exit
+ -V, --version      show version and exit
  -k, --key          Default: 00003657f27e3b22
+ -v, --volume       Default: 100
+ -m, --mode         Default: 16
  -e, --extension    Default: acb.bytes
  -i, --inputDir     Default: acb
  -o, --outputDir    Default: wav
