@@ -5,11 +5,11 @@
 * Windows 7 or later
 * [Microsoft Visual C++ Redistributable 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48145)
 
-## Release
+## Releases
 [Here](https://github.com/KOZ39/acb2wav/releases)
 
 ## Run from Source
-* [Python 3.5+](https://www.python.org/)
+* [Python 3.6+](https://www.python.org/)
 * [acbpy (Destrapier)](https://github.com/Destrapier/acbpy)
 * [hcapy (Destrapier)](https://github.com/Destrapier/hcapy)
 
@@ -32,6 +32,9 @@ Options:
 acb2wav.exe -k 00000000000022CE -e acb.txt -ns
 acb2wav.exe -k 8910 -e acb.txt -ns
 ```
+
+## References
+* [losnoco/vgmstream](https://github.com/losnoco/vgmstream/blob/master/src/meta/hca_keys.h)
 
 ## Other Tools
 * [AssetStudio](https://github.com/Perfare/AssetStudio)
